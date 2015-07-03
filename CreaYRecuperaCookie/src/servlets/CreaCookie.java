@@ -19,6 +19,7 @@ public class CreaCookie extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         // se inicializa un objeto Cookie "vacío"  
+        
         String nombreCookie = "";
         String contenidoCookie = "";
         String clave="";
@@ -32,7 +33,13 @@ public class CreaCookie extends HttpServlet {
        
         contenidoCookie=request.getQueryString();
 
-        out.println("<html>");
+        imprimir(response, out, nombreCookie, contenidoCookie);
+    }
+
+	private void imprimir(HttpServletResponse response, PrintWriter out,
+			String nombreCookie, String contenidoCookie) {
+		out.println("<!DOCTYPE html>");
+		out.println("<html>");
         out.println("<head>");
         out.println("<title>Crea y Recupera</title>");            
         out.println("</head>");
@@ -40,11 +47,7 @@ public class CreaCookie extends HttpServlet {
         out.println("<h1>Servlet Crea y Recupera</h1>");
 
         try {
-          // se crea el objeto cookie en el servidor
-          unaCookie = new Cookie(nombreCookie, contenidoCookie);
-            
-          // se añade a la respuesta para enviar al cliente
-          response.addCookie(unaCookie);                           
+          crearCookie(response, nombreCookie, contenidoCookie);                           
           
           out.println("Se crea una cookie de nombre " + nombreCookie);
           out.println("<br />");
@@ -62,7 +65,17 @@ public class CreaCookie extends HttpServlet {
           out.println("</html>");
     	  out.close();
       }
-    }
+	}
+
+	private void crearCookie(HttpServletResponse response, String nombreCookie,
+			String contenidoCookie) {
+		Cookie unaCookie;
+		// se crea el objeto cookie en el servidor
+          unaCookie = new Cookie(nombreCookie, contenidoCookie);
+            
+          // se añade a la respuesta para enviar al cliente
+          response.addCookie(unaCookie);
+	}
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
