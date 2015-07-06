@@ -20,6 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/RecuperaCookie")
 public class RecuperaCookie extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -44,7 +49,7 @@ public class RecuperaCookie extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		try (PrintWriter out = response.getWriter()) {
 			// String oculto = "";
-			int i;
+			
 
 			// Recepción del parámetro oculto
 			// oculto = request.getParameter("oculto");
@@ -73,7 +78,7 @@ public class RecuperaCookie extends HttpServlet {
 		// Recepción de cookies
 		Cookie[] arrayCookies = request.getCookies();
 		int longitud = arrayCookies.length;
-		Map<String, String> parametros;
+		//Map<String, String> parametros;
 		Map<String, List<String>> parametros2;
 		if (arrayCookies != null && longitud > 0) {
 			for (i = 0; i < longitud; i++) {
@@ -112,6 +117,7 @@ public class RecuperaCookie extends HttpServlet {
 	// extrae los pares campo=valor de una QUERY_STRING
 	// trata a cada parámetro de manera independiente, aunque se llamen igual
 	// no permite valores nulos
+	@SuppressWarnings("unused")
 	private static Map<String, String> extraeDatosDeQueryString(
 			String queryString) throws UnsupportedEncodingException {
 		Map<String, String> query_pairs = new LinkedHashMap<String, String>();

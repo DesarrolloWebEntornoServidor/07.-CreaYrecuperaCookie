@@ -7,13 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
-import java.net.*;  // URLEncoder y URLDecoder
 import javax.servlet.annotation.WebServlet;
 
 @WebServlet("/CreaCookie")
 public class CreaCookie extends HttpServlet {
 
-    protected void procesaSolicitud(HttpServletRequest request, HttpServletResponse response)
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected void procesaSolicitud(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         response.setContentType("text/html;charset=UTF-8");
@@ -24,13 +28,14 @@ public class CreaCookie extends HttpServlet {
         String contenidoCookie = "";
         String clave="";
         String idioma="";
-        Cookie unaCookie = null;
         
         // Recepción de parámetros
         nombreCookie = request.getParameter("usuario");
         clave = request.getParameter("clave");
         idioma = request.getParameter("idioma");
        
+        System.out.println("nombreCookie"+nombreCookie+", clave"+clave+", dioma"+idioma);
+        
         contenidoCookie=request.getQueryString();
 
         imprimir(response, out, nombreCookie, contenidoCookie);
@@ -69,7 +74,7 @@ public class CreaCookie extends HttpServlet {
 
 	private void crearCookie(HttpServletResponse response, String nombreCookie,
 			String contenidoCookie) {
-		Cookie unaCookie;
+		Cookie unaCookie = null;
 		// se crea el objeto cookie en el servidor
           unaCookie = new Cookie(nombreCookie, contenidoCookie);
             
